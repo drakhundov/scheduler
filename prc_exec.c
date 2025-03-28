@@ -14,7 +14,7 @@ void handle_signal(int sig) {
     }
 }
 
-void run_job(char *job_id, int total_time) {
+void run_process(char *prc_id, int total_time) {
     int elapsed_time = 0;
     while (elapsed_time < total_time) {
         if (stopped) {
@@ -22,21 +22,21 @@ void run_job(char *job_id, int total_time) {
         }
         sleep(1);  // Simulate real execution.
         elapsed_time++;
-        printf("%s running... %d/%d seconds completed\n", job_id, elapsed_time, total_time);
+        printf("%s running... %d/%d seconds completed\n", prc_id, elapsed_time, total_time);
     }
-    printf("%s finished execution.\n", job_id);
+    printf("%s finished execution.\n", prc_id);
     exit(0);
 }
 
 int main(int argc, char *argv[]) {
     if (argc != 3) {
-        fprintf(stderr, "Usage: %s <job_id:string> <execution_time>\n", argv[0]);
+        fprintf(stderr, "Usage: %s <prc_id:string> <execution_time>\n", argv[0]);
         exit(1);
     }
-    char *job_id = argv[1];
+    char *prc_id = argv[1];
     int execution_time = atoi(argv[2]);
     signal(SIGSTOP, handle_signal);
     signal(SIGCONT, handle_signal);
-    run_job(job_id, execution_time);
+    run_process(prc_id, execution_time);
     return 0;
 }
