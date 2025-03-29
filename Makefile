@@ -30,7 +30,7 @@ $(TEST_TARGET): $(TEST_OBJS)
 	$(CC) $(CFLAGS) -o $@ $^
 
 run:
-	./$(TARGET)
+	./$(TARGET) Jobs.txt
 
 test: $(TEST_TARGET)
 	./$(TEST_TARGET)
